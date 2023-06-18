@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your all task to to"
+        android:fontFamily="@font/latoblack"
+        android:textSize="24sp"
+        android:textColor="#000"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tvHeaderHome"
+        android:layout_marginBottom="20dp"
+        />
+    
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nothing to do, create something..."
+        android:fontFamily="@font/latoregu"
+        android:textSize="20sp"
+        android:id="@+id/tvNothing"
+        android:layout_below="@+id/tvHeaderHome"
+        android:layout_marginLeft="30dp"
+        />
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:id="@+id/rcv_list_home"
+        android:layout_below="@+id/tvHeaderHome"
+
+        />
+
+</RelativeLayout>

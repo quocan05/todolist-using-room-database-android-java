@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="Create a new task"
+        android:textColor="#000"
+        android:gravity="center_horizontal"
+        android:fontFamily="@font/latoblack"
+        android:id="@+id/tvCreateNew"
+        android:layout_marginBottom="20dp"
+        />
+    <EditText
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edt_nameTask"
+        android:hint="Name of task"
+        android:layout_below="@+id/tvCreateNew"
+        android:fontFamily="@font/latoregu"
+        android:layout_marginBottom="20dp"
+        />
+
+    <TextView
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvSelectType"
+        android:text="Select type of task"
+        android:textSize="18sp"
+        android:fontFamily="@font/latoregu"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:layout_below="@+id/edt_nameTask"
+        android:layout_marginBottom="10dp"
+        />
+
+        <RadioGroup
+
+            android:id="@+id/radioGrType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@+id/tvSelectType"
+            android:layout_marginBottom="10px"
+            >
+
+            <RadioButton
+                android:padding="10dp"
+                android:id="@+id/rbWork"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Work"
+                android:layout_weight="1"
+                android:fontFamily="@font/latoregu"/>
+
+            <RadioButton
+                android:padding="10dp"
+                android:id="@+id/rbStudy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Study"
+                android:layout_weight="1"
+                android:fontFamily="@font/latoregu" />
+
+            <RadioButton
+                android:padding="10dp"
+                android:id="@+id/rbRelax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Relax"
+                android:layout_weight="1"
+                android:fontFamily="@font/latoregu" />
+        </RadioGroup>
+
+    <Button
+        android:id="@+id/btnAddTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioGrType"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/layout_button"
+        android:backgroundTint="#000"
+        android:text="Create new"
+        android:textColor="#fff" />
+
+
+</RelativeLayout>

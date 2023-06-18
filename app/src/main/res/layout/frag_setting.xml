@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvClearAll"
+        android:text="Clear all task"
+        android:fontFamily="@font/latoblack"
+        />
+
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/clearall"
+        android:id="@+id/btnClearAll"
+        android:layout_below="@+id/tvClearAll"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvChangeTheme"
+        android:text="Change theme"
+        android:fontFamily="@font/latoblack"
+        android:layout_below="@+id/btnClearAll"
+        />
+
+
+    <ImageButton
+        android:id="@+id/btnChangeTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/change_theme"
+        android:layout_below="@+id/tvChangeTheme"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Provided by Dang Quoc An "
+        android:id="@+id/tvProvide"
+        android:layout_below="@+id/btnChangeTheme"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/latobold"
+        android:textColor="#000"
+        />
+
+</RelativeLayout>
