@@ -56,7 +56,6 @@ public class FragHome extends Fragment {
 //        });
 
 
-
         TextView tvNoItem = view.findViewById(R.id.tvNothing);
         RecyclerView rcvListTask = view.findViewById(R.id.rcv_list_home);
         TaskViewModel taskViewModel = new ViewModelProvider(getActivity()).get(TaskViewModel.class);
@@ -74,6 +73,16 @@ public class FragHome extends Fragment {
             public void deleteTask(Task task) {
                 clickDeleteTask(task);
             }
+
+            @Override
+            public void updateStatusTask(Task task) {
+                clickUpdateStatus(task);
+            }
+        }, new TaskListAdapter.ItemClickListenerRCV() {
+            @Override
+            public void onItemClick(Task task) {
+                clickSeeInfo(task);
+            }
         });
 
 
@@ -90,19 +99,72 @@ public class FragHome extends Fragment {
             }
         });
 
-
-
         rcvListTask.setAdapter(taskListAdapter);
 
-
-
         return view;
+    }
+
+    private void clickSeeInfo(Task task) {
+        Toast.makeText(getActivity(), "info task: " + task.toString(), Toast.LENGTH_SHORT).show();
+    }
+
+    private void clickUpdateStatus(Task taskUpdateStatus) {
+        if (!taskUpdateStatus.isStatusTask()) {
+            new AlertDialog.Builder(getContext())
+                    .setTitle("Confirm complete task")
+                    .setMessage("Are you completed bro: " + taskUpdateStatus.getNameTask() + " ?")
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            confirmUpdateStatus(taskUpdateStatus);
+                        }
+                    })
+                    .setNegativeButton("NAH BRUH, IM DONE YET", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            unDoneTask(taskUpdateStatus);
+                        }
+                    })
+                    .show();
+        } else {
+            new AlertDialog.Builder(getContext())
+                    .setTitle("Undone task")
+                    .setMessage("You have done yet bro: " + taskUpdateStatus.getNameTask() + " ?")
+                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            unDoneTask(taskUpdateStatus);
+                        }
+                    })
+                    .setNegativeButton("NAH BRUH", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            confirmUpdateStatus(taskUpdateStatus);
+                        }
+                    })
+                    .show();
+        }
+    }
+
+    private void unDoneTask(Task taskUpdateStatus) {
+        taskUpdateStatus.setStatusTask(false);
+        taskRepo.updateData(taskUpdateStatus);
+        Toast.makeText(getActivity(), "Undone task: " + taskUpdateStatus.getNameTask() + ", " + taskUpdateStatus.isStatusTask(), Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void confirmUpdateStatus(Task taskUpdateStatus) {
+
+        taskUpdateStatus.setStatusTask(true);
+        taskRepo.updateData(taskUpdateStatus);
+        Toast.makeText(getActivity(), "Complete task: " + taskUpdateStatus.getNameTask() + ", " + taskUpdateStatus.isStatusTask(), Toast.LENGTH_SHORT).show();
+
     }
 
     private void clickDeleteTask(Task taskForDelete) {
         new AlertDialog.Builder(getContext())
                 .setTitle("Confirm delete task")
-                .setMessage("Are you sure wanna delete task: " + taskForDelete.getNameTask()+ " ?")
+                .setMessage("Are you sure wanna delete task: " + taskForDelete.getNameTask() + " ?")
                 .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -115,7 +177,7 @@ public class FragHome extends Fragment {
 
     private void confirmDeleteTask(Task taskForDelete) {
         taskRepo.deleteData(taskForDelete);
-        Toast.makeText(getActivity(), "Delete"+ taskForDelete.getNameTask() +" success !", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Delete" + taskForDelete.getNameTask() + " success !", Toast.LENGTH_SHORT).show();
     }
 
     private void clickUpdateTask(Task taskForUpdate) {
@@ -163,7 +225,6 @@ public class FragHome extends Fragment {
         });
 
         dialog.show();
-
 
     }
 
