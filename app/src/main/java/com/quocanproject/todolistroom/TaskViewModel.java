@@ -21,6 +21,11 @@ public class TaskViewModel extends AndroidViewModel {
 
     LiveData<List<Task>> getAllTask() { return listTask; }
 
+    LiveData<List<Task>> getAllTaskSearch(String name) {
+        return taskRepo.searchTask(name);
+    }
+
+
     public void insert(Task task) { taskRepo.insertData(task); }
 
 }

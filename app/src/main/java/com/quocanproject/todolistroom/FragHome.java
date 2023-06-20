@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -30,36 +31,18 @@ import java.util.List;
 
 public class FragHome extends Fragment {
 
-
     TaskRepo taskRepo;
-
-    String[] itemSortby = {"Day create: Oldest", "Day create: Newest"};
-
-    AutoCompleteTextView autoCompleteTextView;
-    ArrayAdapter<String> adapterSort;
+    LiveData<List<Task>> taskLiveData;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_home, container, false);
 
-//        autoCompleteTextView = view.findViewById(R.id.autoCompleteTextSort);
-//        adapterSort = new ArrayAdapter<String>(getActivity(), R.layout.list_sort_item, itemSortby);
-//        autoCompleteTextView.setAdapter(adapterSort);
-//
-//        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                String name =  adapterView.getItemAtPosition(i).toString();
-//                Toast.makeText(getActivity(), name, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-
         TextView tvNoItem = view.findViewById(R.id.tvNothing);
         RecyclerView rcvListTask = view.findViewById(R.id.rcv_list_home);
         TaskViewModel taskViewModel = new ViewModelProvider(getActivity()).get(TaskViewModel.class);
-        LiveData<List<Task>> taskLiveData = taskViewModel.getAllTask();
+        taskLiveData = taskViewModel.getAllTask();
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(requireContext());
         rcvListTask.setLayoutManager(layoutManager);
@@ -93,9 +76,40 @@ public class FragHome extends Fragment {
                 if (rcvListTask.getAdapter() != null && rcvListTask.getAdapter().getItemCount() > 0) {
                     //Toast.makeText(getActivity(),"Item: "+ rcvListTask.getAdapter().getItemCount(), Toast.LENGTH_SHORT).show();
                     tvNoItem.setVisibility(View.GONE);
+                    //searchView.setVisibility(View.GONE);
                 } else {
                     tvNoItem.setVisibility(View.VISIBLE);
+                    //searchView.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+
+        SearchView searchView = view.findViewById(R.id.searchBox);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                taskLiveData = taskViewModel.getAllTaskSearch(query);
+                Toast.makeText(getActivity(), query, Toast.LENGTH_SHORT).show();
+                taskLiveData.observe(getViewLifecycleOwner(), new Observer<List<Task>>() {
+                    @Override
+                    public void onChanged(List<Task> tasks) {
+                        taskListAdapter.setData(tasks);
+                    }
+                });
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                taskLiveData = taskViewModel.getAllTaskSearch(newText);
+                Toast.makeText(getActivity(), newText, Toast.LENGTH_SHORT).show();
+                taskLiveData.observe(getViewLifecycleOwner(), new Observer<List<Task>>() {
+                    @Override
+                    public void onChanged(List<Task> tasks) {
+                        taskListAdapter.setData(tasks);
+                    }
+                });
+                return false;
             }
         });
 

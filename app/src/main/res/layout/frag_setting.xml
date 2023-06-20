@@ -50,4 +50,12 @@
         android:textColor="#000"
         />
 
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:src="@drawable/vegtetaultra"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        />
+
 </RelativeLayout>

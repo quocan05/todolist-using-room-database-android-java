@@ -29,6 +29,10 @@ public class TaskRepo {
         return taskList;
     }
 
+    public LiveData<List<Task>> searchTask(String name){
+        return taskDAO.listFromSearch(name);
+    }
+
 
     private static class InsertTask extends AsyncTask<Task, Void, Void>{
         private TaskDAO taskDAO;
@@ -79,6 +83,19 @@ public class TaskRepo {
         @Override
         protected Void doInBackground(Task... tasks) {
             taskDAO.updateTask(tasks[0]);
+            return null;
+        }
+    }
+    private static class SearchTask extends AsyncTask<Task, Void, Void>{
+        private TaskDAO taskDAO;
+
+        public SearchTask(TaskDAO taskDAO) {
+            this.taskDAO = taskDAO;
+        }
+
+        @Override
+        protected Void doInBackground(Task... tasks) {
+            taskDAO.listFromSearch(tasks[0].getNameTask());
             return null;
         }
     }

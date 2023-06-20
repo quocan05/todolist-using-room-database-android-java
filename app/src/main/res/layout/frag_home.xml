@@ -15,8 +15,18 @@
         android:id="@+id/tvHeaderHome"
         android:layout_marginBottom="20dp"
         />
-    
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchBox"
+        android:layout_below="@+id/tvHeaderHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_search_box"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20sp"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,8 +46,7 @@
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:id="@+id/rcv_list_home"
-        android:layout_below="@+id/tvHeaderHome"
-
+        android:layout_below="@+id/searchBox"
         />
 
 </RelativeLayout>

@@ -27,4 +27,6 @@ public interface TaskDAO {
     @Query("SELECT * FROM tasklist")
     LiveData<List<Task>> getListTask();
 
+    @Query("SELECT * FROM tasklist WHERE nameTask LIKE '%' || :name || '%'")
+    LiveData<List<Task>> listFromSearch(String name);
 }
