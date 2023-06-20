@@ -2,11 +2,13 @@ package com.quocanproject.todolistroom;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -234,6 +236,7 @@ public class FragHome extends Fragment {
                 taskRepo.updateData(taskForUpdate);
                 dialog.dismiss();
 
+                hideKeyboard(view);
                 Toast.makeText(getActivity(), "Update " + taskForUpdate.toString() + "success!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -246,5 +249,11 @@ public class FragHome extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         taskRepo = new TaskRepo(getActivity().getApplication());
+    }
+
+
+    void hideKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

@@ -20,12 +20,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import com.quocanproject.todolistroom.database.TaskDatabase;
+
+import java.util.List;
 
 public class FragAddTask extends Fragment {
 
     TaskRepo taskRepo;
+    LiveData<List<Task>> taskListLiveData;
 
     @Nullable
     @Override
@@ -36,6 +41,7 @@ public class FragAddTask extends Fragment {
         EditText edtAddTask = view.findViewById(R.id.edt_nameTask);
         RadioGroup rgType = view.findViewById(R.id.radioGrType);
         Button btnAddTask = view.findViewById(R.id.btnAddTask);
+
 
         edtAddTask.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -57,27 +63,38 @@ public class FragAddTask extends Fragment {
 
                 try {
                     String name = edtAddTask.getText().toString().trim();
-                    
-                    if(TextUtils.isEmpty(name)){
+
+                    if (TextUtils.isEmpty(name)) {
                         Toast.makeText(getActivity(), "Enter name task !", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
                     String type;
                     int selectedRadioButtonId = rgType.getCheckedRadioButtonId();
-                    if (selectedRadioButtonId != -1){
+                    if (selectedRadioButtonId != -1) {
                         RadioButton rbSelected = getActivity().findViewById(selectedRadioButtonId); // phai get id tu view cua onCreate
                         type = rbSelected.getText().toString().trim();
                         Task task = new Task(name, type, false);
-                        taskRepo.insertData(task);
-                        hideKeyboard(view);
-                        rgType.clearCheck();
-                        edtAddTask.setText("");
-                        Toast.makeText(getActivity(), "add "+ task.toString() + " success!", Toast.LENGTH_SHORT).show();
+                        taskRepo.insertData(task, new TaskRepo.TaskCallback() {
+                            @Override
+                            public void onTaskInserted() {
+                                hideKeyboard(view);
+                                rgType.clearCheck();
+                                edtAddTask.setText("");
+                                Toast.makeText(getActivity(), "add " + task.toString() + " success!", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onTaskExists() {
+                                Toast.makeText(getActivity(), "Task already exist !", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                     } else {
                         Toast.makeText(getActivity(), "Please chose type of task", Toast.LENGTH_SHORT).show();
                     }
-                } catch (Exception e){
+
+                } catch (Exception e) {
                     e.printStackTrace();
                     String stackTrace = Log.getStackTraceString(e);
                     Toast.makeText(getActivity(), stackTrace, Toast.LENGTH_SHORT).show();
@@ -85,17 +102,15 @@ public class FragAddTask extends Fragment {
 
             }
         });
-
         return view;
     }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        taskRepo = new TaskRepo(getActivity().getApplication());
         super.onActivityCreated(savedInstanceState);
+        taskRepo = new TaskRepo(getActivity().getApplication());
     }
 
-    void hideKeyboard(View view){
+    void hideKeyboard(View view) {
         InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }

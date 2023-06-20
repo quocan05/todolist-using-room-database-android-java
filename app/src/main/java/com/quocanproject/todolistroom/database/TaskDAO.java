@@ -1,5 +1,7 @@
 package com.quocanproject.todolistroom.database;
 
+import android.database.Cursor;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -29,4 +31,8 @@ public interface TaskDAO {
 
     @Query("SELECT * FROM tasklist WHERE nameTask LIKE '%' || :name || '%'")
     LiveData<List<Task>> listFromSearch(String name);
+
+    @Query("SELECT EXISTS(SELECT 1 FROM tasklist WHERE nameTask = :name LIMIT 1)")
+    int checkTaskExist(String name);
+
 }

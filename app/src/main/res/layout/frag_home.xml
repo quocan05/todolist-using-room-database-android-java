@@ -35,7 +35,7 @@
         android:fontFamily="@font/latoregu"
         android:textSize="20sp"
         android:id="@+id/tvNothing"
-        android:layout_below="@+id/tvHeaderHome"
+        android:layout_below="@+id/searchBox"
         android:layout_marginLeft="30dp"
         />
 
