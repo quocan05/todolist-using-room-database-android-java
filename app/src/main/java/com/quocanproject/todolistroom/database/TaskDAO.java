@@ -24,15 +24,15 @@ public interface TaskDAO {
     @Update
     void updateTask(Task task);
 
-    @Query("DELETE FROM tasklist")
+    @Query("DELETE FROM tasklist_table")
     void deleteAll();
-    @Query("SELECT * FROM tasklist")
+    @Query("SELECT * FROM tasklist_table")
     LiveData<List<Task>> getListTask();
 
-    @Query("SELECT * FROM tasklist WHERE nameTask LIKE '%' || :name || '%'")
+    @Query("SELECT * FROM tasklist_table WHERE nameTask LIKE '%' || :name || '%'")
     LiveData<List<Task>> listFromSearch(String name);
 
-    @Query("SELECT EXISTS(SELECT 1 FROM tasklist WHERE nameTask = :name LIMIT 1)")
+    @Query("SELECT EXISTS(SELECT 1 FROM tasklist_table WHERE nameTask = :name LIMIT 1)")
     int checkTaskExist(String name);
 
 }

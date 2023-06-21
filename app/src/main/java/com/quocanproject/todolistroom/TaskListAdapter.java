@@ -1,5 +1,6 @@
 package com.quocanproject.todolistroom;
 
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +84,14 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
 
                 }
             });
+
             holder.cbDone.setChecked(task.isStatusTask());
+
+            if(task.isStatusTask()){
+                holder.tvNameTask.setPaintFlags(holder.tvNameTask.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            } else {
+                holder.tvNameTask.setPaintFlags(holder.tvNameTask.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+            }
 
 
         } else {

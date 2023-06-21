@@ -1,24 +1,29 @@
 package com.quocanproject.todolistroom;
 
 
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "tasklist")
+import java.util.Date;
+
+@Entity(tableName = "tasklist_table")
 public class Task {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-
-
     private String nameTask;
     private String typeTask;
     private boolean statusTask;
 
-    public Task(String nameTask, String typeTask, boolean statusTask) {
+    private String dueDate;
+
+
+    public Task(String nameTask, String typeTask, boolean statusTask, String dueDate) {
         this.nameTask = nameTask;
         this.typeTask = typeTask;
         this.statusTask = statusTask;
+        this.dueDate = dueDate;
     }
 
     public boolean isStatusTask() {
@@ -53,12 +58,23 @@ public class Task {
         this.typeTask = typeTask;
     }
 
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
+
     @Override
     public String toString() {
-        return "Task :" +
+        return "Task{" +
                 "id=" + id +
-                ", Name ='" + nameTask + '\'' +
-                ", Type ='" + typeTask + '\'' +
-                ", Status =" + statusTask ;
+                ", nameTask='" + nameTask + '\'' +
+                ", typeTask='" + typeTask + '\'' +
+                ", statusTask=" + statusTask +
+                ", dueDate='" + dueDate + '\'' +
+                '}';
     }
 }

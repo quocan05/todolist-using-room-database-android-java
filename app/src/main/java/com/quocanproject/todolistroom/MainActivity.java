@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     ViewPager viewPager;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +32,10 @@ public class MainActivity extends AppCompatActivity {
         initUI();
         setupViewPager();
         takeEvt();
+
     }
+
+
 
     private void takeEvt() {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -87,5 +95,8 @@ public class MainActivity extends AppCompatActivity {
     private void initUI() {
         bottomNavigationView = findViewById(R.id.bottomnav);
         viewPager = findViewById(R.id.viewpager);
+
     }
+
+
 }

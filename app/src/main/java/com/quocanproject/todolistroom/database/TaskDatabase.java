@@ -16,11 +16,11 @@ import java.util.List;
 
 @Database(
         entities = Task.class,
-        version =2
+        version = 2
 )
 public abstract class TaskDatabase extends RoomDatabase {
 
-    private static final String DB_NAME = "task_db";
+    private static final String DB_NAME = "tasklist_db";
 
     public abstract TaskDAO taskDAO();
 

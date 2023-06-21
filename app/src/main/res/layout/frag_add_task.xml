@@ -78,17 +78,62 @@
                 android:fontFamily="@font/latoregu" />
         </RadioGroup>
 
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Due date"
+        android:id="@+id/tvDueDate"
+        android:layout_below="@+id/radioGrType"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/latoregu"
+        android:textStyle="bold"
+        android:textColor="#000"
+        />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioGrSetDueDate"
+        android:layout_below="@+id/tvDueDate"
+        android:orientation="horizontal"
+        >
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbNoDueDate"
+            android:text="Unset"
+            android:padding="10dp"
+            android:fontFamily="@font/latoregu"
+            android:layout_weight="1"
+            />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rbSetDueDate"
+            android:text="Set due date"
+            android:padding="10dp"
+            android:fontFamily="@font/latoregu"
+            android:layout_weight="1"
+
+            />
+
+    </RadioGroup>
+
     <Button
         android:id="@+id/btnAddTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/radioGrType"
+        android:layout_below="@+id/radioGrSetDueDate"
         android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/layout_button"
         android:backgroundTint="#000"
         android:text="Create new"
         android:textColor="#fff" />
+
 
 
 </RelativeLayout>
