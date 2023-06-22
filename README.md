@@ -26,7 +26,7 @@
 * Clone this repository and import into Android Studio
 
 ```bash
-  link repo
+  https://github.com/quocan05/todolist-using-room-database-android-java.git
 ```
 * Or just download latest build [Google Drive Download](https://docs.google.com/uc?export=download&id=1r241cIi9FC4oluC0pk5bvXcX3Lf6bl8-)
 
