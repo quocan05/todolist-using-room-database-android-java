@@ -163,7 +163,7 @@ public class FragAddTask extends Fragment {
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
-        int style = AlertDialog.THEME_HOLO_DARK;
+        int style = AlertDialog.THEME_HOLO_LIGHT;
 
         Calendar minDate = Calendar.getInstance();
 
