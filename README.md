@@ -5,6 +5,8 @@
 
 **IDE:** Android Studio
 
+**Language using:** Java
+
 **Database:** Room database
 
 **Reference material:** [Chat GPT](https://chat.openai.com/), [Android Developer](https://developer.android.com/) , [Google](google.com), [YouTube](youtube.com), [Stack Overflow](https://stackoverflow.com/), ...
