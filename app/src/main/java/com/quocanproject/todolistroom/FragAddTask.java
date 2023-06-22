@@ -55,8 +55,16 @@ public class FragAddTask extends Fragment {
         rgDueDate.check(R.id.rbNoDueDate);
 
         rbSetDueDate = view.findViewById(R.id.rbSetDueDate);
-        rbSetDueDate.setText(getDateToday());
+
         initDatePicker();
+        rbSetDueDate.setText(getDateToday());
+
+        rbSetDueDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDatePicker(view);
+            }
+        });
 
         edtAddTask.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -87,22 +95,17 @@ public class FragAddTask extends Fragment {
                     String type;
                     int selectedRadioButtonId = rgType.getCheckedRadioButtonId();
                     int selectedRadioButtonDueDateId = rgDueDate.getCheckedRadioButtonId();
-                    Toast.makeText(getActivity(), selectedRadioButtonDueDateId+"", Toast.LENGTH_SHORT).show();
+
+                    //Toast.makeText(getActivity(), selectedRadioButtonDueDateId+"", Toast.LENGTH_SHORT).show();
                     if (selectedRadioButtonId != -1) {
                         RadioButton rbSelected = getActivity().findViewById(selectedRadioButtonId); // phai get id tu view cua onCreate
                         type = rbSelected.getText().toString().trim();
 
-                        Task task = new Task(name, type, false, null);
+
+                        Task task = new Task(name, type, false, "unset");
 
                         if (selectedRadioButtonDueDateId == R.id.rbSetDueDate){
-                            Toast.makeText(getActivity(), rbSetDueDate.getText().toString(), Toast.LENGTH_SHORT).show();
-                            rbSetDueDate.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    openDatePicker(view);
-                                }
-                            });
-
+                            task.setDueDate(rbSetDueDate.getText().toString().trim());
                         }
 
                         taskRepo.insertData(task, new TaskRepo.TaskCallback() {
@@ -111,7 +114,8 @@ public class FragAddTask extends Fragment {
                                 hideKeyboard(view);
                                 rgType.clearCheck();
                                 edtAddTask.setText("");
-                                Toast.makeText(getActivity(), "add " + task.toString() + " success!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Add success!", Toast.LENGTH_SHORT).show();
+                                rgDueDate.check(R.id.rbNoDueDate);
                             }
 
                             @Override
@@ -119,7 +123,6 @@ public class FragAddTask extends Fragment {
                                 Toast.makeText(getActivity(), "Task already exist !", Toast.LENGTH_SHORT).show();
                             }
                         });
-
                     } else {
                         Toast.makeText(getActivity(), "Please chose type of task", Toast.LENGTH_SHORT).show();
                     }
@@ -161,7 +164,12 @@ public class FragAddTask extends Fragment {
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
         int style = AlertDialog.THEME_HOLO_DARK;
+
+        Calendar minDate = Calendar.getInstance();
+
+
         datePickerDialog = new DatePickerDialog(getContext(), style, dateSetListener, year, month, day);
+        datePickerDialog.getDatePicker().setMinDate(minDate.getTimeInMillis());
     }
 
     private String makeDateString(int day, int month, int year) {
@@ -209,7 +217,6 @@ public class FragAddTask extends Fragment {
         InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
-
 
     void openDatePicker(View view){
         datePickerDialog.show();

@@ -13,8 +13,9 @@
         android:layout_height="wrap_content"
         android:text="Name task"
         android:paddingLeft="14dp"
+        android:textAllCaps="true"
         android:id="@+id/tvNameTask"
-        android:textSize="22sp"
+        android:textSize="28sp"
         android:fontFamily="@font/latobold"
         android:textStyle="bold"
         android:textColor="#000"
@@ -31,6 +32,19 @@
         android:textStyle="italic"
         android:layout_toStartOf="@+id/btnEditTask"
         android:textSize="20sp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvShowDueDate"
+        android:text="Due date: unset"
+        android:paddingLeft="20dp"
+        android:layout_below="@+id/tvType"
+        android:fontFamily="@font/latobold"
+        android:textStyle="italic"
+        android:layout_toStartOf="@+id/btnEditTask"
+        android:textSize="16sp"
+        android:layout_marginTop="12dp"
         />
 
     <ImageButton

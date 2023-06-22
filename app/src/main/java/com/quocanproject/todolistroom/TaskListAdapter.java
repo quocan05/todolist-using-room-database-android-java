@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -54,6 +55,23 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             Task task = listTask.get(position);
             holder.tvNameTask.setText(task.getNameTask());
             holder.tvTypeTask.setText(task.getTypeTask());
+
+            switch (task.getTypeTask()){
+                case "Work":
+                    holder.tvTypeTask.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.color_work));
+                    break;
+                case "Relax":
+                    holder.tvTypeTask.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.color_relax));
+                    break;
+                case "Study":
+                    holder.tvTypeTask.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.color_study));
+                    break;
+            }
+
+            holder.tvShowDueDate.setText(task.getDueDate());
+
+
+
 
             holder.tvNameTask.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -116,7 +134,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
     public class TaskViewHolder extends RecyclerView.ViewHolder{
 
 
-        TextView tvNameTask, tvTypeTask;
+        TextView tvNameTask, tvTypeTask, tvShowDueDate;
         ImageButton btnEdit, btnDelete;
         CheckBox cbDone;
         public TaskViewHolder(@NonNull View itemView, ItemClickListenerRCV iclick) {
@@ -126,6 +144,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             btnDelete = itemView.findViewById(R.id.btnDelete);
             btnEdit = itemView.findViewById(R.id.btnEditTask);
             cbDone = itemView.findViewById(R.id.cbDone);
+            tvShowDueDate = itemView.findViewById(R.id.tvShowDueDate);
             itemClickListenerRCV = iclick;
         }
 

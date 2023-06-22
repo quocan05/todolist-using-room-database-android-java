@@ -66,7 +66,7 @@ public class FragHome extends Fragment {
         }, new TaskListAdapter.ItemClickListenerRCV() {
             @Override
             public void onItemClick(Task task) {
-                clickSeeInfo(task);
+                //clickSeeInfo(task);
             }
         });
 
@@ -91,7 +91,7 @@ public class FragHome extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 taskLiveData = taskViewModel.getAllTaskSearch(query);
-                Toast.makeText(getActivity(), query, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), query, Toast.LENGTH_SHORT).show();
                 taskLiveData.observe(getViewLifecycleOwner(), new Observer<List<Task>>() {
                     @Override
                     public void onChanged(List<Task> tasks) {
@@ -104,7 +104,7 @@ public class FragHome extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 taskLiveData = taskViewModel.getAllTaskSearch(newText);
-                Toast.makeText(getActivity(), newText, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), newText, Toast.LENGTH_SHORT).show();
                 taskLiveData.observe(getViewLifecycleOwner(), new Observer<List<Task>>() {
                     @Override
                     public void onChanged(List<Task> tasks) {
@@ -128,19 +128,22 @@ public class FragHome extends Fragment {
         if (!taskUpdateStatus.isStatusTask()) {
             new AlertDialog.Builder(getContext())
                     .setTitle("Confirm complete task")
-                    .setMessage("Are you completed bro: " + taskUpdateStatus.getNameTask() + " ?")
+                    .setMessage("Are you completed task: " + taskUpdateStatus.getNameTask() + " ?")
                     .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             confirmUpdateStatus(taskUpdateStatus);
+                            dialogInterface.dismiss();
                         }
                     })
-                    .setNegativeButton("NAH BRUH, IM DONE YET", new DialogInterface.OnClickListener() {
+                    .setNegativeButton("NO, IM DONE YET", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             unDoneTask(taskUpdateStatus);
+                            dialogInterface.dismiss();
                         }
                     })
+                    .setCancelable(false)
                     .show();
         } else {
             new AlertDialog.Builder(getContext())
@@ -150,14 +153,17 @@ public class FragHome extends Fragment {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             unDoneTask(taskUpdateStatus);
+                            dialogInterface.dismiss();
                         }
                     })
-                    .setNegativeButton("NAH BRUH", new DialogInterface.OnClickListener() {
+                    .setNegativeButton("NO", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             confirmUpdateStatus(taskUpdateStatus);
+                            dialogInterface.dismiss();
                         }
                     })
+                    .setCancelable(false)
                     .show();
         }
     }
@@ -189,7 +195,7 @@ public class FragHome extends Fragment {
                         confirmDeleteTask(taskForDelete);
                     }
                 })
-                .setNegativeButton("NAH BRUH", null)
+                .setNegativeButton("NO", null)
                 .show();
     }
 

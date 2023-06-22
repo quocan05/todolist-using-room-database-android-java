@@ -44,15 +44,15 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.menu_home:
                         viewPager.setCurrentItem(0);
-                        Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.menu_add:
                         viewPager.setCurrentItem(1);
-                        Toast.makeText(MainActivity.this, "add", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "add", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.menu_setting:
                         viewPager.setCurrentItem(2);
-                        Toast.makeText(MainActivity.this, "setting", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "setting", Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return false;
@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
     private void initUI() {
         bottomNavigationView = findViewById(R.id.bottomnav);
         viewPager = findViewById(R.id.viewpager);
-
     }
 
 
