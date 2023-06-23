@@ -57,7 +57,7 @@ public class FragAddTask extends Fragment {
         rbSetDueDate = view.findViewById(R.id.rbSetDueDate);
 
         initDatePicker();
-        rbSetDueDate.setText(getDateToday());
+        rbSetDueDate.setText("Add due date");
 
         rbSetDueDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +116,7 @@ public class FragAddTask extends Fragment {
                                 edtAddTask.setText("");
                                 Toast.makeText(getActivity(), "Add success!", Toast.LENGTH_SHORT).show();
                                 rgDueDate.check(R.id.rbNoDueDate);
+                                rbSetDueDate.setText("Add due date");
                             }
 
                             @Override

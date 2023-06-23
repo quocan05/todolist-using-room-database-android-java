@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         android:text="Name task"
         android:paddingLeft="14dp"
-        android:textAllCaps="true"
+
         android:id="@+id/tvNameTask"
-        android:textSize="28sp"
+        android:textSize="24sp"
         android:fontFamily="@font/latobold"
         android:textStyle="bold"
         android:textColor="#000"

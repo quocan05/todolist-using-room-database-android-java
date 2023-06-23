@@ -24,6 +24,7 @@
         android:layout_below="@+id/tvCreateNew"
         android:fontFamily="@font/latoregu"
         android:layout_marginBottom="20dp"
+        android:inputType="textCapSentences"
         />
 
     <TextView

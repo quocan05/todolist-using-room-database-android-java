@@ -188,7 +188,7 @@ public class FragHome extends Fragment {
     private void clickDeleteTask(Task taskForDelete) {
         new AlertDialog.Builder(getContext())
                 .setTitle("Confirm delete task")
-                .setMessage("Are you sure wanna delete task: " + taskForDelete.getNameTask() + " ?")
+                .setMessage("Are you sure about delete this task: " + taskForDelete.getNameTask() + " ?")
                 .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

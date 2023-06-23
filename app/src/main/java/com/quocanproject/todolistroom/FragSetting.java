@@ -28,14 +28,14 @@ public class FragSetting extends Fragment {
             public void onClick(View view) {
                 new AlertDialog.Builder(getContext())
                         .setTitle("Confirm clear")
-                        .setMessage("Are you sure wanna clear all task ?")
+                        .setMessage("Are you sure about clear all task ?")
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 clickToClear();
                             }
                         })
-                        .setNegativeButton("NAH BRUH", null)
+                        .setNegativeButton("NO", null)
                         .show();
             }
         });
